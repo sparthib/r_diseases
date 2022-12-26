@@ -1,0 +1,67 @@
+####LOAD LIBRARIES####
+library("here")
+library("stringr")
+library("readr")
+library("dplyr")
+
+#### LOAD ORPHA DATA #####
+
+orpha <- read_csv(here("data", "orpha.csv"))
+human_do <- read_csv(here("data", "human_do.csv"))
+
+
+#### INSPECT COLUMNS ####
+colnames(orpha)
+# [1] "id"                                        "name"
+# [3] "parents"                                   "children"
+# [5] "ancestors"                                 "obsolete"
+# [7] "format-version"                            "data-version"
+# [9] "property_value"                            "ontology"
+# [11] "xref"                                      "is_a"
+# [13] "http://www.orpha.net/ORDO/Orphanet_410295" "http://www.orpha.net/ORDO/Orphanet_317345"
+# [15] "http://www.orpha.net/ORDO/Orphanet_317343" "http://www.orpha.net/ORDO/Orphanet_327767"
+# [17] "http://www.orpha.net/ORDO/Orphanet_317349" "http://www.orpha.net/ORDO/Orphanet_317348"
+# [19] "http://www.orpha.net/ORDO/Orphanet_410296" "http://www.orpha.net/ORDO/Orphanet_317344"
+# [21] "http://www.orpha.net/ORDO/Orphanet_465410" "http://www.orpha.net/ORDO/Orphanet_317346"
+
+nrow(orpha)
+# [1] 15312
+
+
+colnames(human_do)
+# [1] "id"                "name"              "parents"           "children"          "ancestors"         "obsolete"
+# [7] "format-version"    "data-version"      "date"              "saved-by"          "subsetdef"         "default-namespace"
+# [13] "remark"            "ontology"          "property_value"    "alt_id"            "def"               "subset"
+# [19] "synonym"           "xref"              "is_a"              "created_by"        "creation_date"     "comment"
+# [25] "disjoint_from"     "replaced_by"
+
+nrow(human_do)
+# [1] 13650
+
+#### XREF ####
+
+head(orpha$xref)
+# [1] "ICD-10:Q98.8; MeSH:D007713; MedDRA:10048230; UMLS:C2936741"
+# [2] "ICD-10:G11.3; MeSH:D001260; MedDRA:10003594; OMIM:208900; OMIM:208910; UMLS:C0004135"
+# [3] "ICD-10:E70.3; MeSH:C537043; OMIM:300650; UMLS:C1845069"
+# [4] "ICD-10:D36.1"
+# [5] "ICD-10:D36.1"
+# [6] "ICD-10:D36.1"
+
+#Each xref observation contains disease ID list in character form.
+# class(orpha$xref[1])
+# "ICD-10:Q98.8; MeSH:D007713; MedDRA:10048230; UMLS:C2936741"
+# "character"
+
+## Missing values
+sum(is.na(orpha$xref)) #2763 missing vals
+
+# 2763/nrow(orpha)
+# [1] 0.1804467
+
+sum(is.na(human_do$xref))
+#3116
+# 3116/nrow(human_do)
+# [1] 0.2282784
+
+## ~20% external ref IDs missing in both datasets.
