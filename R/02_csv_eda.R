@@ -38,6 +38,13 @@ colnames(human_do)
 nrow(human_do)
 # [1] 13650
 
+
+#### keep only ID vals in columns ####
+orpha <- orpha |> mutate(across(everything(), gsub, pattern = "http://www.orpha.net/ORDO/Orphanet_", replacement = ""))
+human_do <- human_do |> mutate(across(everything(), gsub, pattern = "DOID:", replacement = ""))
+
+
+
 #### XREF ####
 
 head(orpha$xref)
@@ -65,3 +72,15 @@ sum(is.na(human_do$xref))
 # [1] 0.2282784
 
 ## ~20% external ref IDs missing in both datasets.
+
+
+#### Number of rows that don't have children ####
+
+sum(is.na(orpha$children)) #14263
+sum(is.na(human_do$children)) #11353
+
+
+#### XREF string mutation ####
+
+test_string <- orpha$xref[1]
+
