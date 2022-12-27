@@ -82,5 +82,32 @@ sum(is.na(human_do$children)) #11353
 
 #### XREF string mutation ####
 
-test_string <- orpha$xref[1]
+orpha <- orpha |> mutate(xref_new = paste0(" ", xref)) #add space to first position
+orpha <- orpha |> mutate(xref_new = str_extract_all(xref_new, pattern = "[^;]*:")) #extract all db keys
 
+db_list_orpha <- as.list(orpha$xref_new)
+db_list_orpha <- unlist(db_list_orpha ,recursive=F)
+db_list_orpha <- gsub(":", "", db_list_orpha)
+db_list_orpha <- gsub(" ", "", db_list_orpha)
+
+#Below are all possible DBs ORPHA is linked to.
+# > unique(db_list_orpha)
+# [1] "ICD-10"    "MeSH"      "MedDRA"
+# [4] "UMLS"      "OMIM"      "ICD-11"
+# [7] "Ensembl"   "Genatlas"  "HGNC"
+# [10] "SwissProt" "Reactome"  "IUPHAR"
+
+
+human_do <- human_do |> mutate(xref_new = paste0(" ", xref)) #add space to first position
+human_do <- human_do |> mutate(xref_new = str_extract_all(xref_new, pattern = "[^;]*:")) #extract all db keys
+
+db_list_human_do <- as.list(human_do$xref_new)
+db_list_human_do <- unlist(db_list_human_do ,recursive=F)
+db_list_human_do <- gsub(":", "", db_list_human_do)
+db_list_human_do <- gsub(" ", "", db_list_human_do)
+
+# [1] "ICDO"                   "MESH"                   "NCI"                    "SNOMEDCT_US_2022_03_01"
+# [5] "UMLS_CUI"               "ICD10CM"                "ICD9CM"                 "SNOMEDCT_US_2021_09_01"
+# [9] "ORDO"                   "GARD"                   "OMIM"                   "EFO"
+# [13] "KEGG"                   "MEDDRA"                 "SNOMEDCT_US_2021_07_31" "SNOMEDCT_US_2022_10_31"
+# [17] "ICD11"                  "SNOMEDCT_US_2022_07_31" "SNOMEDCT_US_2020_09_01" "SNOMEDCT_US_2020_03_01"
