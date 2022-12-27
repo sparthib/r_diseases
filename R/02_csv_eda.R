@@ -1,3 +1,6 @@
+## Cleaning up some columns and EDA
+
+
 ####LOAD LIBRARIES####
 library("here")
 library("stringr")
