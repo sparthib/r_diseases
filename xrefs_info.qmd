@@ -1,0 +1,41 @@
+---
+title: "Info on all xrefs"
+format: html
+editor: visual
+---
+
+### ORPHA
+
+```{R }
+# > unique(db_list_orpha)
+# [1] "ICD-10"    "MeSH"      "MedDRA"
+# [4] "UMLS"      "OMIM"      "ICD-11"
+# [7] "Ensembl"   "Genatlas"  "HGNC"
+# [10] "SwissProt" "Reactome"  "IUPHAR"
+```
+
+1.  [ICD-10:](https://www.cms.gov/Medicare/Coding/ICD10/ICD-10Resources) ICD-10 is the 10th revision of the International Statistical Classification of Diseases and Related Health Problems, a medical classification list by the World Health Organization.
+2.  [MeSH](https://www.nlm.nih.gov/mesh/meshhome.html) (Medical Subject Headings) is the NLM controlled vocabulary thesaurus used for indexing PubMed citations.
+3.  [MedDRA](https://www.meddra.org/how-to-use/support-documentation/english/welcome) is available to all for use in the registration, documentation and safety monitoring of medical products both before and after a product has been authorised for sale. Products covered by the scope of MedDRA include pharmaceuticals, biologics, vaccines and drug-device combination products
+4.  [The UMLS](https://www.nlm.nih.gov/research/umls/index.html), or Unified Medical Language System, is a set of files and software that brings together many [health and biomedical vocabularies and standards](https://www.nlm.nih.gov/research/umls/sourcereleasedocs/index.html) to enable interoperability between computer systems.
+5.  [OMIM:](https://www.omim.org/about)is a comprehensive, authoritative compendium of human genes and genetic phenotypes that is freely available and updated daily. The full-text, referenced overviews in OMIM contain information on all known mendelian disorders and over 16,000 genes. OMIM focuses on the relationship between phenotype and genotype. It is updated daily, and the entries contain copious links to other genetics resources.
+6.  [ICD-11:](https://icd.who.int/en) ICD serves a broad range of uses globally and provides critical knowledge on the extent, causes and consequences of human disease and death worldwide via data that is reported and coded with the ICD.
+7.  [Ensembl:](https://asia.ensembl.org/index.html) Ensembl is a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation. Ensembl annotate genes, computes multiple alignments, predicts regulatory function and collects disease data.
+8.  [GenAtlas](http://genatlas.medecine.univ-paris5.fr/imagine/home.php?sous_menu=1): The GenAtlas database provides information on the structure, expression and function of genes, gene mutations and their consequences on diseases. Ontologies used for annotation are constructed to allow a classification in three sub-databases: gene, phenotypes and selected references. Information is daily collected and manually annotated from Current Contents/Life Sciences literature.
+9.  [HGNC](https://www.genenames.org/about/): The HGNC is responsible for approving unique symbols and names for human loci, including protein coding genes, ncRNA genes and pseudogenes, to allow unambiguous scientific communication... For each known human gene we approve a gene name and symbol (short-form abbreviation). All approved symbols are stored in the HGNC database, [www.genenames.org](https://www.genenames.org/tools/search), a curated online repository of HGNC-approved gene nomenclature, gene groups and associated resources including links to genomic, proteomic and phenotypic information. Each symbol is unique and we ensure that each gene is only given one approved gene symbol. ...We have already approved almost 43,000 symbols; around 19,000 of these are for protein-coding genes, and the remainder includes pseudogenes, non-coding RNAs and genomic features (see [HGNC Search](https://www.genenames.org/tools/search))
+10. [SwissProt](https://www.expasy.org/resources/uniprotkb-swiss-prot): UniProtKB/Swiss-Prot is the expertly curated component of UniProtKB (produced by the UniProt consortium). It contains hundreds of thousands of protein descriptions, including function, domain structure, subcellular location, post-translational modifications and functionally characterized variants.
+11. [Reactome:](https://reactome.org/) Reactome is a free, open-source, curated and peer-reviewed pathway database.
+12. [IUPHAR:](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3013670/) The IUPHAR database is an established online reference resource for several important classes of human drug targets and related proteins. As well as providing recommended nomenclature, the database integrates information on the chemical, genetic, functional and pathophysiological properties of receptors and ion channels, curated and peer-reviewed from the biomedical literature by a network of experts.\
+
+### HUMAN DO
+
+```{R }
+
+#All possible DBs human_do is linked to.
+# > unique(db_list_human_do)
+# [1] "ICDO"                   "MESH"                   "NCI"                    "SNOMEDCT_US_2022_03_01"
+# [5] "UMLS_CUI"               "ICD10CM"                "ICD9CM"                 "SNOMEDCT_US_2021_09_01"
+# [9] "ORDO"                   "GARD"                   "OMIM"                   "EFO"
+# [13] "KEGG"                   "MEDDRA"                 "SNOMEDCT_US_2021_07_31" "SNOMEDCT_US_2022_10_31"
+# [17] "ICD11"                  "SNOMEDCT_US_2022_07_31" "SNOMEDCT_US_2020_09_01" "SNOMEDCT_US_2020_03_01"
+```
