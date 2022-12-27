@@ -84,6 +84,8 @@ sum(is.na(human_do$children)) #11353
 
 
 #### XREF string mutation ####
+orpha$xref <- gsub("ICD-", "ICD", orpha$xref)
+orpha$xref <- str_to_lower(orpha$xref)
 
 orpha <- orpha |> mutate(xref_new = paste0(" ", xref)) #add space to first position
 orpha <- orpha |> mutate(xref_new = str_extract_all(xref_new, pattern = "[^;]*:")) #extract all db keys
@@ -95,11 +97,11 @@ db_list_orpha <- gsub(" ", "", db_list_orpha)
 
 #Below are all possible DBs ORPHA is linked to.
 # > unique(db_list_orpha)
-# [1] "ICD-10"    "MeSH"      "MedDRA"
-# [4] "UMLS"      "OMIM"      "ICD-11"
-# [7] "Ensembl"   "Genatlas"  "HGNC"
-# [10] "SwissProt" "Reactome"  "IUPHAR"
+# [1] "icd10"     "mesh"      "meddra"    "umls"      "omim"
+# [6] "icd11"     "ensembl"   "genatlas"  "hgnc"      "swissprot"
+# [11] "reactome"  "iuphar"
 
+human_do$xref <- str_to_lower(human_do$xref)
 
 human_do <- human_do |> mutate(xref_new = paste0(" ", xref)) #add space to first position
 human_do <- human_do |> mutate(xref_new = str_extract_all(xref_new, pattern = "[^;]*:")) #extract all db keys
@@ -111,8 +113,17 @@ db_list_human_do <- gsub(" ", "", db_list_human_do)
 
 #All possible DBs human_do is linked to.
 # > unique(db_list_human_do)
-# [1] "ICDO"                   "MESH"                   "NCI"                    "SNOMEDCT_US_2022_03_01"
-# [5] "UMLS_CUI"               "ICD10CM"                "ICD9CM"                 "SNOMEDCT_US_2021_09_01"
-# [9] "ORDO"                   "GARD"                   "OMIM"                   "EFO"
-# [13] "KEGG"                   "MEDDRA"                 "SNOMEDCT_US_2021_07_31" "SNOMEDCT_US_2022_10_31"
-# [17] "ICD11"                  "SNOMEDCT_US_2022_07_31" "SNOMEDCT_US_2020_09_01" "SNOMEDCT_US_2020_03_01"
+# [1] "icdo"                   "mesh"                   "nci"                    "snomedct_us_2022_03_01" "umls_cui"
+# [6] "icd10cm"                "icd9cm"                 "snomedct_us_2021_09_01" "ordo"                   "gard"
+# [11] "omim"                   "efo"                    "kegg"                   "meddra"                 "snomedct_us_2021_07_31"
+# [16] "snomedct_us_2022_10_31" "icd11"                  "snomedct_us_2022_07_31" "snomedct_us_2020_09_01" "snomedct_us_2020_03_01"
+
+
+#### SAVE NEW DFS ####
+if(!file.exists(here("data", "ordo_post_02.csv"))){
+    write_csv(orpha, here("data", "ordo_post_02.csv"))
+}
+
+if(!file.exists(here("data", "human_do_post_02.csv"))){
+    write_csv(human_do, here("data", "human_do_post_02.csv"))
+}
