@@ -106,6 +106,8 @@ db_list_human_do <- unlist(db_list_human_do ,recursive=F)
 db_list_human_do <- gsub(":", "", db_list_human_do)
 db_list_human_do <- gsub(" ", "", db_list_human_do)
 
+#All possible DBs human_do is linked to.
+# > unique(db_list_human_do)
 # [1] "ICDO"                   "MESH"                   "NCI"                    "SNOMEDCT_US_2022_03_01"
 # [5] "UMLS_CUI"               "ICD10CM"                "ICD9CM"                 "SNOMEDCT_US_2021_09_01"
 # [9] "ORDO"                   "GARD"                   "OMIM"                   "EFO"
