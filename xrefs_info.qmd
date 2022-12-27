@@ -64,4 +64,4 @@ editor: visual
 
 10. [MEDDRA](https://www.meddra.org/how-to-use/support-documentation/english/welcome): Same as [MedDRA](https://www.meddra.org/how-to-use/support-documentation/english/welcome).
 
-    Common b/w ORPHA and HUMAN DO are: MESH, ICD 11, ICD10, ICD 9, MedDRA, OMIM. \
+    Common b/w ORPHA and HUMAN DO are: MESH, ICD 11, ICD10, ICD 9, MedDRA, OMIM.\
