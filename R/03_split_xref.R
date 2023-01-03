@@ -44,4 +44,29 @@ for(id in db_list_human_do){
                              no = NA)'))) }
 
 
+ordo <- ordo |>  select(-c(MeSHpresent))
+# > colnames(ordo)
+# [1] "id"                                        "name"                                      "parents"
+# [4] "children"                                  "ancestors"                                 "obsolete"
+# [7] "format-version"                            "data-version"                              "property_value"
+# [10] "ontology"                                  "xref"                                      "is_a"
+# [13] "http://www.orpha.net/ORDO/Orphanet_410295" "http://www.orpha.net/ORDO/Orphanet_317345" "http://www.orpha.net/ORDO/Orphanet_317343"
+# [16] "http://www.orpha.net/ORDO/Orphanet_327767" "http://www.orpha.net/ORDO/Orphanet_317349" "http://www.orpha.net/ORDO/Orphanet_317348"
+# [19] "http://www.orpha.net/ORDO/Orphanet_410296" "http://www.orpha.net/ORDO/Orphanet_317344" "http://www.orpha.net/ORDO/Orphanet_465410"
+# [22] "http://www.orpha.net/ORDO/Orphanet_317346" "xref_new"                                  "icd10present"
+# [25] "meshpresent"                               "meddrapresent"                             "umlspresent"
+# [28] "omimpresent"                               "icd11present"                              "ensemblpresent"
+# [31] "genatlaspresent"                           "hgncpresent"                               "swissprotpresent"
+# [34] "reactomepresent"                           "iupharpresent"
 
+# colnames(human_do)
+# [1] "id"                            "name"                          "parents"                       "children"                      "ancestors"
+# [6] "obsolete"                      "format-version"                "data-version"                  "date"                          "saved-by"
+# [11] "subsetdef"                     "default-namespace"             "remark"                        "ontology"                      "property_value"
+# [16] "alt_id"                        "def"                           "subset"                        "synonym"                       "xref"
+# [21] "is_a"                          "created_by"                    "creation_date"                 "comment"                       "disjoint_from"
+# [26] "replaced_by"                   "xref_new"                      "icdopresent"                   "meshpresent"                   "ncipresent"
+# [31] "snomedct_us_2022_03_01present" "umls_cuipresent"               "icd10cmpresent"                "icd9cmpresent"                 "snomedct_us_2021_09_01present"
+# [36] "ordopresent"                   "gardpresent"                   "omimpresent"                   "efopresent"                    "keggpresent"
+# [41] "meddrapresent"                 "snomedct_us_2021_07_31present" "snomedct_us_2022_10_31present" "icd11present"                  "snomedct_us_2022_07_31present"
+# [46] "snomedct_us_2020_09_01present" "snomedct_us_2020_03_01present"
