@@ -83,12 +83,34 @@ t2 - t1 #Time difference of 1.74198 mins
 t3 - t2 #Time difference of 3.138833 mins
 
 
-warhead_Name_crossing$url <- warhead_Name_crossing |>
-    mutate("https://pubmed.ncbi.nlm.nih.gov/?term=%28%28",
-           term_1_url_encode, "+AND+", term_2_url_encode)
-
-##task: make sure spell-check is off
+warhead_Name_crossing <- warhead_Name_crossing |>
+    mutate(url = paste0("https://pubmed.ncbi.nlm.nih.gov/?term=%28%28",
+           term_1_url_encode, "+AND+", term_2_url_encode))
 
 
+get_num_results <- function(url){
+    html_data <- read_html(url)
+    res <- (html_data |> html_nodes("div.results-amount") |> html_text())[1]
+    res <- gsub("\n", "", res)
+    res <- gsub("results", "", res)
+    res <- gsub(" ", "", res)
+    res
+}
 
 
+is_spell_check_warning_na <- function(url){
+    html_data <- read_html(url)
+    res <- (html_data |> html_nodes("corrected-query-warning") |> html_text())[1]
+    res <- gsub(" ", "", res)
+    is.na(res)
+}
+
+t4 <- Sys.time()
+warhead_Name_crossing$num_results <- map(warhead_Name_crossing$url, get_num_results)
+
+t5 <- Sys.time()
+warhead_Name_crossing$is_spell_checked <- map(warhead_Name_crossing$url, is_spell_check_warning_na)
+t6 <- Sys.time()
+
+t5-t4
+t6-t5
