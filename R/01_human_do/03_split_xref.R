@@ -70,5 +70,3 @@ ordo <- ordo |>  select(-c(MeSHpresent))
 # [36] "ordopresent"                   "gardpresent"                   "omimpresent"                   "efopresent"                    "keggpresent"
 # [41] "meddrapresent"                 "snomedct_us_2021_07_31present" "snomedct_us_2022_10_31present" "icd11present"                  "snomedct_us_2022_07_31present"
 # [46] "snomedct_us_2020_09_01present" "snomedct_us_2020_03_01present"
-
-
