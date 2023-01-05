@@ -15,19 +15,6 @@
 #that means we didn't find any articles related to that search term.
 
 
-#Try it with one term
-
-####load html ####
-url <- "https://pubmed.ncbi.nlm.nih.gov/?term=%28%28hashimoto%29+"
-
-html_data <- read_html(url)
-
-##we want to grab the title text ####
-
-res <- (html_data |> html_nodes("div.results-amount") |> html_text())[1]
-
-
-
 ####LOAD PACKAGES ####
 library(here)
 library(rvest)
@@ -37,6 +24,8 @@ library(tidyr) #crossing() function
 library(stringr)
 library(purrr)
 
+library(parallel)
+detectCores() 8
 
 
 #### load data ####
@@ -88,11 +77,12 @@ warhead_Name_crossing <- warhead_Name_crossing |>
            term_1_url_encode, "+AND+", term_2_url_encode))
 
 
+
+#### FUNCTIONS FOR GETTING RELEVANT INFO OUT OF HTML PAGE ####
 get_num_results <- function(url){
     html_data <- read_html(url)
     res <- (html_data |> html_nodes("div.results-amount") |> html_text())[1]
     res <- gsub("\n", "", res)
-    res <- gsub("results", "", res)
     res <- gsub(" ", "", res)
     res
 }
@@ -101,16 +91,43 @@ get_num_results <- function(url){
 is_spell_check_warning_na <- function(url){
     html_data <- read_html(url)
     res <- (html_data |> html_nodes("corrected-query-warning") |> html_text())[1]
-    res <- gsub(" ", "", res)
     is.na(res)
 }
 
-t4 <- Sys.time()
-warhead_Name_crossing$num_results <- map(warhead_Name_crossing$url, get_num_results)
 
+###### CLEAN AND TABULATE EXTERNAL INFO FOR ALL OBS ####
+t4 <- Sys.time()
+foo <- map(warhead_Name_crossing$url[1:10], get_num_results)
 t5 <- Sys.time()
-warhead_Name_crossing$is_spell_checked <- map(warhead_Name_crossing$url, is_spell_check_warning_na)
+
+
 t6 <- Sys.time()
+warhead_Name_crossing$is_spell_checked <- map(warhead_Name_crossing$url, is_spell_check_warning_na)
+t7 <- Sys.time()
 
 t5-t4
-t6-t5
+# Time difference of 6.900798 secs
+
+t7 - t6
+
+
+###### PARALLEL COMPUTATION #####
+s <- system.time({  warhead_Name_crossing$num_results<- mclapply(warhead_Name_crossing$url,
+                                    get_num_results, mc.cores = 4) })
+# user  system elapsed
+# 0.220   0.115   1.858
+
+### Reduced from 6 to 2 seconds.
+warhead_Name_crossing_fraxf <- warhead_Name_crossing |> filter(term_2 == "FRAXF syndrome")
+
+
+warhead_Name_crossing_fraxf$num_results<- mclapply(warhead_Name_crossing_fraxf$url,
+                                                                 get_num_results, mc.cores = 4)
+# user  system elapsed
+# 6.807   1.422  44.574
+
+warhead_Name_crossing_fraxf$is_not_spell_checked <- mclapply(warhead_Name_crossing_fraxf$url,
+                                                         is_spell_check_warning_na, mc.cores = 4)
+
+
+warhead_Name_crossing_fraxf
