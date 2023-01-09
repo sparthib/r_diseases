@@ -83,7 +83,7 @@ get_num_results <- function(url){
     html_data <- read_html(url)
     res <- (html_data |> html_nodes("div.results-amount") |> html_text())[1]
     res <- gsub("\n", "", res)
-    res <- gsub(" ", "", res)
+    res <- gsub("\\s+"," ", res)
     res
 }
 
@@ -118,8 +118,6 @@ s <- system.time({  warhead_Name_crossing$num_results<- mclapply(warhead_Name_cr
 # 0.220   0.115   1.858
 
 ### Reduced from 6 to 2 seconds.
-warhead_Name_crossing_fraxf <- warhead_Name_crossing |> filter(term_2 == "FRAXF syndrome")
-
 
 warhead_Name_crossing_fraxf$num_results<- mclapply(warhead_Name_crossing_fraxf$url,
                                                                  get_num_results, mc.cores = 4)
@@ -131,3 +129,26 @@ warhead_Name_crossing_fraxf$is_not_spell_checked <- mclapply(warhead_Name_crossi
 
 
 warhead_Name_crossing_fraxf
+
+
+
+
+######## Steroid-responsive encephalopathy #########
+#ORDO ID: 83601
+#Steroid-responsive encephalopathy
+
+warhead_Name_crossing_sreat <- warhead_Name_crossing |>
+    filter(grepl("Steroid-responsive encephalopathy", term_2))
+
+
+list_num_results <- mclapply(warhead_Name_crossing_sreat$url,
+                                                   get_num_results, mc.cores = 4)
+list_num_results <- unlist(list_num_results, recursive =  TRUE)
+warhead_Name_crossing_sreat$num_results <- list_num_results
+
+
+
+list_is_not_spell_checked <- mclapply(warhead_Name_crossing_sreat$url,
+                             is_spell_check_warning_na, mc.cores = 4)
+list_is_not_spell_checked  <- unlist(list_is_not_spell_checked, recursive =  TRUE)
+warhead_Name_crossing_sreat$is_not_spell_checked <- list_is_not_spell_checked
