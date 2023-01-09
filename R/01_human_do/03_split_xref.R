@@ -10,8 +10,8 @@ library("readr")
 library("dplyr")
 
 #### LOAD ORPHA DATA #####
-ordo <- read_csv(here("data", "ordo_post_02.csv"))
-human_do <- read_csv(here("data", "human_do_post_02.csv"))
+ordo <- read_csv(here("data", "processed_data", "ordo_post_02.csv"))
+human_do <- read_csv(here("data","processed_data", "human_do_post_02.csv"))
 
 #### 1/0 columns for presence of ID in xref ####
 
@@ -27,8 +27,8 @@ db_list_ordo <- c("icd10", "mesh", "meddra", "umls", "omim","icd11" ,"ensembl",
 
 
 for(id in db_list_ordo){
-eval(parse(text = paste0("ordo$", id, 'present', ' <-', 'ifelse(grepl(id, ordo$xref), ',
-                         'yes = str_extract_all(ordo$xref[2], paste0(id, "([^;])+")),
+eval(parse(text = paste0("ordo$", id, ' <-', 'ifelse(grepl(id, ordo$xref), ',
+                         'yes = str_extract_all(ordo$xref, paste0(id, "([^;])+")),
                              no = NA)'))) }
 
 
@@ -39,12 +39,16 @@ db_list_human_do <- c("icdo", "mesh" ,"nci" , "snomedct_us_2022_03_01" , "umls_c
                       "snomedct_us_2020_03_01")
 
 for(id in db_list_human_do){
-    eval(parse(text = paste0("human_do$", id, 'present',' <-', 'ifelse(grepl(id, human_do$xref), ',
-                             'yes = str_extract_all(human_do$xref[2], paste0(id, "([^;])+")),
+    eval(parse(text = paste0("human_do$", id, ' <-', 'ifelse(grepl(id, human_do$xref), ',
+                             'yes = str_extract_all(human_do$xref, paste0(id, "([^;])+")),
                              no = NA)'))) }
 
-
+# [a-zA-Z]*: to remove text before colon
 ordo <- ordo |>  select(-c(MeSHpresent))
+
+write_csv(ordo, here("data", "processed_data", "ordo_post_03.csv"))
+write_csv(human_do, here("data", "processed_data","human_do_post_03.csv"))
+
 # > colnames(ordo)
 # [1] "id"                                        "name"                                      "parents"
 # [4] "children"                                  "ancestors"                                 "obsolete"

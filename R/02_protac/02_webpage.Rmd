@@ -1,0 +1,65 @@
+---
+title: "pubmed results"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+<!-- Each level 1 header (#) begins a new page in the dashboard. -->
+<!-- Each level 2 header (##) begins a new column. -->
+<!-- Each level 3 header (###) begins a new row. -->
+
+
+Layout, show available datasets, show crossing. 
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(here)
+library(rvest)
+library(dplyr)
+library(readr)
+library(tidyr) #crossing() function
+library(stringr)
+library(purrr)
+
+library(parallel)
+library(shiny)
+library(DT)
+```
+
+
+
+```{r load data, include= FALSE}
+
+warhead_db <- read_csv(here("data", "raw_data", "warhead.csv"))
+ordo <- read_csv(here("data", "processed_data", "ordo_post_02.csv"))
+
+
+```
+
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+
