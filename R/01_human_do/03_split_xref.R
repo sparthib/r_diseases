@@ -27,9 +27,12 @@ db_list_ordo <- c("icd10", "mesh", "meddra", "umls", "omim","icd11" ,"ensembl",
 
 
 for(id in db_list_ordo){
-eval(parse(text = paste0("ordo$", id, ' <-', 'ifelse(grepl(id, ordo$xref), ',
+eval(parse(text = paste0("ordo_", id, ' <-', 'ifelse(grepl(id, ordo$xref), ',
                          'yes = str_extract_all(ordo$xref, paste0(id, "([^;])+")),
-                             no = NA)'))) }
+                             no = NA)')))
+eval(parse(text = paste0("ordo$", id, ' <-', 'unlist("ordo_",', id, ')' )))
+
+    }
 
 
 db_list_human_do <- c("icdo", "mesh" ,"nci" , "snomedct_us_2022_03_01" , "umls_cui", "icd10cm" ,
