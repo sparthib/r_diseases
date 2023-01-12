@@ -138,3 +138,6 @@ list_is_not_spell_checked <- mclapply(warhead_Name_crossing_sreat$url,
                              is_spell_check_warning_na, mc.cores = 4)
 list_is_not_spell_checked  <- unlist(list_is_not_spell_checked, recursive =  TRUE)
 warhead_Name_crossing_sreat$is_not_spell_checked <- list_is_not_spell_checked
+
+write_csv(warhead_Name_crossing_sreat, here("data", "sreat_warhead_example",
+                                            "sreat_warhead_results.csv"))
