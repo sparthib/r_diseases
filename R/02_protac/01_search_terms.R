@@ -100,24 +100,6 @@ is_spell_check_warning_na <- function(url){
 
 
 
-###### CLEAN AND TABULATE EXTERNAL INFO FOR ALL OBS ####
-t4 <- Sys.time()
-foo <- map(warhead_Name_crossing$url[1:10], get_num_results)
-t5 <- Sys.time()
-
-
-t6 <- Sys.time()
-warhead_Name_crossing$is_spell_checked <- map(warhead_Name_crossing$url,
-                                              is_spell_check_warning_na)
-t7 <- Sys.time()
-
-t5-t4
-# Time difference of 6.900798 secs
-
-t7 - t6
-
-
-
 ######## Steroid-responsive encephalopathy #########
 #ORDO ID: 83601
 #Steroid-responsive encephalopathy
