@@ -125,3 +125,30 @@ warhead_Name_crossing_sreat$is_not_spell_checked <- list_is_not_spell_checked
 
 write_csv(warhead_Name_crossing_sreat, here("data", "sreat_warhead_example",
                                             "sreat_warhead_results.csv"))
+
+##Check if there were any results
+# unique(warhead_Name_crossing_sreat$num_results)
+# [1] " No results were found. " NA                         " 4 results "              " 10 results "
+
+##there's one NA and one with 4 results and 10 results.
+
+warhead_Name_crossing_sreat |> filter(num_results != " No results were found. ") |>
+    select(c(term_1, num_results, is_not_spell_checked))
+
+# # A tibble: 2 × 3
+# term_1          num_results    is_not_spell_checked
+# <chr>             <chr>          <lgl>
+# 1 Pyrimidine 1 " 4 results "  TRUE
+# 2 TM           " 10 results " TRUE
+
+
+#where are we seeing NA
+warhead_Name_crossing_sreat |> filter(is.na(num_results)) |>
+    select(c(term_1, num_results, is_not_spell_checked))
+
+# term_1      num_results  is_not_spell_checked
+#   <chr>     <chr>       <lgl>
+# 1 L-Dopa    NA          TRUE
+# 2 rapamycin NA          TRUE
+# 3 NA        NA          TRUE
+
