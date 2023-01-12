@@ -105,17 +105,19 @@ is_spell_check_warning_na <- function(url){
 #Steroid-responsive encephalopathy
 
 
+#filter cartesian product of warhead and diseases for sreat
+
 warhead_Name_crossing_sreat <- warhead_Name_crossing |>
     filter(grepl("Steroid-responsive encephalopathy", term_2))
 
-
+#create column with number of results for pubmed search using disease warhead combination
+#mclapply is used to parallelize
 list_num_results <- mclapply(warhead_Name_crossing_sreat$url,
                                                    get_num_results, mc.cores = 4)
 list_num_results <- unlist(list_num_results, recursive =  TRUE)
 warhead_Name_crossing_sreat$num_results <- list_num_results
 
-
-
+# create column to see if search was autocorrected
 list_is_not_spell_checked <- mclapply(warhead_Name_crossing_sreat$url,
                              is_spell_check_warning_na, mc.cores = 4)
 list_is_not_spell_checked  <- unlist(list_is_not_spell_checked, recursive =  TRUE)
