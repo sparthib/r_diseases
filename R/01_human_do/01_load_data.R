@@ -28,13 +28,8 @@ orpha_df <- as.data.frame(orpha_onto)
 
 
 ##### Create data folder and save data ######
-if(!file.exists(here("data"))){
-    dir.create(here("data"))
-    }
 
-if(!file.exists(here("data", "processed_data", "ordo_post_01.csv"))){
-    write_csv(orpha_df, here("data", "processed_data", "ordo_post_01.csv"))
-}
+write_csv(orpha_df, here("data", "processed_data", "ordo_post_01.csv"))
 
 
 ##### LOAD HUMAN_DO DATA #####
@@ -50,7 +45,6 @@ human_do_onto <- get_ontology(
 
 human_df <- as.data.frame(human_do_onto)
 
-if(!file.exists(here("data", "processed_data", "human_do_post_01.csv"))){
-    write_csv(human_df, here("data","processed_data","human_do_post_01.csv"))
-}
+
+write_csv(human_df, here("data","processed_data","human_do_post_01.csv"))
 

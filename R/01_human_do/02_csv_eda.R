@@ -120,10 +120,6 @@ db_list_human_do <- gsub(" ", "", db_list_human_do)
 
 
 #### SAVE NEW DFS ####
-if(!file.exists(here("data", "processed_data", "ordo_post_02.csv"))){
-    write_csv(orpha, here("data", "processed_data",  "ordo_post_02.csv"))
-}
 
-if(!file.exists(here("data", "human_do_post_02.csv"))){
-    write_csv(human_do, here("data", "processed_data", "human_do_post_02.csv"))
-}
+write_csv(orpha, here("data", "processed_data",  "ordo_post_02.csv"))
+write_csv(human_do, here("data", "processed_data", "human_do_post_02.csv"))
