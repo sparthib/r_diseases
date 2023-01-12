@@ -7,10 +7,10 @@ library("stringr")
 library("readr")
 library("dplyr")
 
-#### LOAD ORPHA DATA #####
+#### LOAD DATA #####
 
-orpha <- read_csv(here("data", "orpha.csv"))
-human_do <- read_csv(here("data", "human_do.csv"))
+orpha <- read_csv(here("data", "processed_data",  "ordo_post_01.csv"))
+human_do <- read_csv(here("data","processed_data", "human_do_post_01.csv"))
 
 
 #### INSPECT COLUMNS ####
@@ -120,7 +120,7 @@ db_list_human_do <- gsub(" ", "", db_list_human_do)
 
 
 #### SAVE NEW DFS ####
-if(!file.exists(here("data", "processed_data" "ordo_post_02.csv"))){
+if(!file.exists(here("data", "processed_data", "ordo_post_02.csv"))){
     write_csv(orpha, here("data", "processed_data",  "ordo_post_02.csv"))
 }
 
