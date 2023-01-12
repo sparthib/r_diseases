@@ -32,8 +32,8 @@ if(!file.exists(here("data"))){
     dir.create(here("data"))
     }
 
-if(!file.exists(here("data", "orpha.csv"))){
-    write_csv(orpha_df, here("data", "orpha.csv"))
+if(!file.exists(here("data", "processed_data", "ordo_post_01.csv"))){
+    write_csv(orpha_df, here("data", "processed_data", "ordo_post_01.csv"))
 }
 
 
@@ -50,7 +50,7 @@ human_do_onto <- get_ontology(
 
 human_df <- as.data.frame(human_do_onto)
 
-if(!file.exists(here("data", "human_do.csv"))){
-    write_csv(human_df, here("data", "human_do.csv"))
+if(!file.exists(here("data", "processed_data", "human_do_post_01.csv"))){
+    write_csv(human_df, here("data","processed_data","human_do_post_01.csv"))
 }
 
