@@ -11,7 +11,7 @@ library("readr")
 
 
 orpha_onto <- get_ontology(
-    file = here("data", "orpha.obo"),
+    file = here("data", "raw_data", "orpha.obo"),
     propagate_relationships = "is_a",
     extract_tags = "everything",
     merge_equivalent_terms = TRUE
